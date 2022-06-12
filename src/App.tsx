@@ -4,8 +4,10 @@ function App() {
   return (
     <div className="app">
 			<Header/>
-			{/*<Sidebar />
-			<Posts />*/}
+			<main className="app__content--wrapper">
+				{/*<Sidebar />
+				<Posts />*/}
+			</main>
     </div>
   )
 }
