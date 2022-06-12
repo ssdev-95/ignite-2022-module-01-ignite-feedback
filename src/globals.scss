@@ -1,0 +1,20 @@
+@import "./colors.scss";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+	-webkit-font-smoothing : antialiased;
+}
+
+.app {
+	min-height: 100vh;
+	width: 78rem;
+	max-width: 100vw;
+	margin-inline: auto;
+
+	background: $gray-800;
+
+	h1 { color: #f0f2f5; }
+}
