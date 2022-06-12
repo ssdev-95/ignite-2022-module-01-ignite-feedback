@@ -10,6 +10,11 @@
 	box-sizing: border-box;
 
 	-webkit-font-smoothing : antialiased;
+	font-family: Roboto, sans-serif;
+}
+
+button {
+	transition: background 0.25s;
 }
 
 .app {
@@ -18,10 +23,18 @@
 	margin-inline: auto;
 
 	background: $gray-800;
+	color: $gray-100;
 }
 
 .app__content--wrapper {
 	width: 78rem;
 	max-width: 100%;
-	min-height: calc(100vh - 4.5rem);
+
+	display: flex;
+	gap: 16px;
+	padding: 20px 3rem;
+
+	@media(max-width: 869px) {
+		padding: 32px 1.75rem;
+	}
 }
