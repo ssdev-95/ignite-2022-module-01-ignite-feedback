@@ -114,12 +114,12 @@ function Post({ post }: IPost) {
     <div className={styles["post__container"]}>
 			<header>
 				<Avatar src="https://github.com/maykbrito.png" />
-				<p>
+				<strong>
 					{post.author.name}
 					<p>{post.author.role}</p>
-				</p>
+				</strong>
 				<time
-					datetime={post.createdAt}
+					dateTime={post.createdAt}
 				>
 					{preview}
 				</time>
@@ -146,8 +146,8 @@ function Post({ post }: IPost) {
 						placeholder="Place your feedback here.."
 						maxLength={100}
 						minLength={5}
-						autocomplete="off"
-						multiline={false}
+						autoComplete="off"
+						multiline="false"
 						value={newComment}
 						onChange={handleCreateNewFeedback}
 						required
