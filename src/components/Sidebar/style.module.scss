@@ -71,8 +71,6 @@
 		right: 0.5rem;
 		visibility: hidden;
 		box-shadow: 0 0 10px 5px $gray-600;
-
-		transition: opacity 0.5s;
 	}
 }
 
@@ -85,4 +83,32 @@
 	height: 6rem;
 
 	object-fit: cover;
+}
+
+.anchor {
+	color: $green-500;
+	position: absolute;
+	top: 0.95rem;
+	right: 0.95rem;
+	border-radius: 2px;
+
+	&:active {
+		color: $green-400;
+	}
+
+	@media(min-width:1024px){
+		&::hover {
+			color: $green-400;
+		}
+	}
+}
+
+@keyframes SLIDE {
+	from {
+		transform: translateX(200%);
+	}
+
+	to {
+		transform: translateX(0);
+	}
 }

@@ -1,4 +1,4 @@
-import * as Icon from 'phosphor-react'
+import { GithubLogo, Pen } from 'phosphor-react'
 import Avatar from '../Avatar'
 import Poster from '../../assets/poster.png'
 import styles from './style.module.scss'
@@ -7,10 +7,11 @@ interface SidebarProps {
 	isOpen: boolean;
 }
 
-const user = {
-	avatar_url: 'https://en.gravatar.com/userimage/221952240/1f48c295029265db95bdc00a82b43988.jpg',
-	firstName: 'Saromon',
-	role:  'Frontend dev.'
+export const user = {
+	avatarUrl: 'https://en.gravatar.com/userimage/221952240/1f48c295029265db95bdc00a82b43988.jpg',
+	name: 'Saromon',
+	role:  'Frontend dev.',
+	git: 'https://github.com/xSallus/?tab=repositories'
 }
 
 function Sidebar({ isOpen }:SidebarProps) {
@@ -20,16 +21,23 @@ function Sidebar({ isOpen }:SidebarProps) {
 		  isOpen ? styles.show : ''
 		].join(' ')}>
 			<img src={Poster} className={styles.poster}/>
+			<a
+				href={user.git}
+				className={styles.anchor}
+				target="__blank"
+			>
+				<GithubLogo size={36} weight="fill" />
+			</a>
 			<div>
-				<Avatar src={user.avatar_url} />
+				<Avatar src={user.avatarUrl} noLoader />
 				<h6>
-					{user.firstName}
+					{user.name}
 					<p>{user.role}</p>
 				</h6>
 			</div>
 			<div>
 				<button>
-					<Icon.Pen size={20} />
+					<Pen size={20} />
 					Edit profile
 				</button>
 			</div>

@@ -11,6 +11,59 @@
 
 .no-border {
 	outline: 0;
+}
+
+.sm {
 	width: 3rem;
 	height: 3rem;
+}
+
+.spinner__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& > div {
+		width: 60%;
+		height: 60%;
+		background: $spinner;
+		border-radius: 4rem;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		animation: SPIN 0.75s infinite $smooth;
+
+		&::after {
+			content: "";
+			background: $gray-700;
+
+			width: 90%;
+			height: 90%;
+			border-radius: inherit;
+		}
+	}
+}
+
+@keyframes SPIN {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	25% {
+		transform: rotate(90deg);
+	}
+
+	50% {
+		transform: rotate(180deg);
+	}
+
+	75% {
+		transform: rotate(270deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }

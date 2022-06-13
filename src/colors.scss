@@ -11,3 +11,6 @@ $green-500: #00875f;
 $green-400: #00b37e;
 
 $red-400: #f75a68;
+
+$smooth: cubic-bezier(0.7,0.7,0.7,0.7);
+$spinner: linear-gradient(90deg, $green-500, $green-400, $gray-700 95%);

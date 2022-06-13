@@ -3,6 +3,7 @@
 .modal__overlay {
 	height: 100vh;
 	width: 100vw;
+	padding-top: 16vh;
 
 	position: fixed;
 	top: 0;
@@ -11,13 +12,14 @@
 	background: rgba(0,0,0,0.68);
 
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 }
 
 .modal__container {
 	width: 22rem;
 	height: 14rem;
+	padding: 8rem 0;
 	gap: 1rem;
 
 	border-radius: 8px;
@@ -37,6 +39,9 @@
 		color: $gray-400;
 	}
 
+	& > header {
+		color: $red-400;
+	}
 
 	 & >footer {
 		width: 80%;

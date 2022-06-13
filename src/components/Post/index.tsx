@@ -35,19 +35,15 @@ export type IComment = {
 	},
 	content: string
 }
-const lol = {
-  id: 'j2s8fujekak2k2e9dj3j3is9',
-	createdAt:'2021-05-18 20:30',
-	author: {name:'Filipe Deschamps',avatarUrl:"https://github.com/filipedeschamps.png"},
-	content:'Salame é bom'
-}
+
 const endpoint = '/api/?results=1&inc=name,picture'
 function Post({ post }: IPost) {
-	const [comments, setComments] = useState<IComment[]>([lol])
+	const [comments, setComments] = useState<IComment[]>([])
 	const [newComment, setNewComment] = useState("")
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [idToDelete, setIdToDelete] = useState("")
-	const preview = formatDate(post.createdAt)
+
+	const preview = formatDate(post.createdAt, 'post')
 
 	function uuid(text:string, timestamp:string) {
 		const id = [
@@ -69,7 +65,7 @@ function Post({ post }: IPost) {
 			const { data } = await api.get(endpoint)
 			const { name, picture } = data.results[0] as Record<string, any>
 
-			const stamp = String(Date.now())
+			const stamp = String(new Date())
 			const comment = {
 				id: uuid(newComment, stamp),
 				createdAt: stamp,
@@ -113,7 +109,7 @@ function Post({ post }: IPost) {
   return (
     <div className={styles["post__container"]}>
 			<header>
-				<Avatar src="https://github.com/maykbrito.png" />
+				<Avatar src={post.author.avatarUrl} />
 				<strong>
 					{post.author.name}
 					<p>{post.author.role}</p>
@@ -128,7 +124,11 @@ function Post({ post }: IPost) {
 				{post.content.map(item => {
 					if(item.type === 'link') {
 						return (
-							<a key={item.id} href={item.href}>
+							<a
+								key={item.id}
+								href={item.href}
+								target="__blank"
+							>
 								{item.text}
 							</a>
 						)

@@ -4,6 +4,7 @@
 	flex: 1;
 	background: $gray-700;
 	padding: 2rem;
+	transition: height 2s $smooth;
 
 
 	& + .post__container {
@@ -13,13 +14,14 @@
 	& > header {
 		display:flex;
 		gap: 1rem;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: flex-start;
 
 		& > time {
 			margin-left: auto;
 			color: $gray-500;
-			/*align-self: flex-start;*/
+			font-size: 80%;
+			margin-top: 0.25rem;
 		}
 
 		& > strong {
@@ -27,6 +29,7 @@
 
 			p {
 				margin-top: 0.5rem;
+				font-size: 80%;
 				font-weight: 600;
 				color: $gray-500;
 			}
@@ -37,21 +40,24 @@
 .post__content {
 	padding: 1.25rem 0;
 
-	p, a {
+	p {
+		font-size: 1rem;
+		font-weight: 400;
+		color: $gray-500;
+
 		&:not(:first-child) {
 			margin-top: 1.25rem;
 		}
 	}
 
-	p {
-		font-size: 1rem;
-		font-weight: 400;
-		color: $gray-500;
-	}
-
-	a {
+	& > a {
 		text-decoration: none;
 		color: $green-400;
+		border-radius: 2px;
+
+		&:not(:first-child) {
+			margin-top: 1.25rem;
+		}
 	}
 }
 

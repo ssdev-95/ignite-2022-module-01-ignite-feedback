@@ -1,13 +1,14 @@
 import Post from '../Post'
+import { user } from '../Sidebar'
 import styles from './style.module.scss'
 
 const posts = [
 	{
 		id: 'nwjedujej1928ruejj2j1jq',
 		author: {
-			name: 'Mayk Brito',
-			avatarUrl: 'https://github.com/maykbrito.png',
-			role: 'Educator @Rocketseat&trade;'
+			name: user.name,
+			avatarUrl: user.avatarUrl,
+			role: user.role
 		},
 		createdAt: '2022-06-13 07:59',
 		content: [
@@ -21,17 +22,22 @@ const posts = [
 	}, {
 		id: 'k2idn38a8I2n2r9s8h__7238',
 		author: {
-			name: 'Tio Yan',
-			avatarUrl: 'https://github.com/yants95.png',
-			role: 'Ademiro Discord @Rocketseat&trade;'
+			name: user.name,
+			avatarUrl: user.avatarUrl,
+			role: user.role
 		},
 		createdAt: '2022-06-12 19:59',
 		content: [
 			{
+				id: 'jqd8u3jt8fiwkHwjs8',
+				type: 'paragraph',
+				text: 'Seguiu de volta e deu star nos repos é humilde.',
+				href: undefined
+			},{
 				type: 'link',
 				text: 'Github',
 				id: 'JwiduUw7s7g2__b&H2be88a2bb2',
-				href: 'https://github.com/yants95/?tab=repositories'
+				href: user.git
 			}
 		]
 	}

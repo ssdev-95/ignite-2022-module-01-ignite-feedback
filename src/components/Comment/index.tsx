@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { ThumbsUp, Trash } from 'phosphor-react'
 import Avatar from '../Avatar'
 import { IComment } from '../Post'
+import { formatDate } from '../../services/date-format'
+import Logo from '../../assets/logo.svg'
 import styles from './style.module.scss'
 
 interface CommentProps {
@@ -13,6 +15,7 @@ function Commentary({
 	onDeleteRequested, comment
 }:CommentProps) {
 	const [upvotes, setUpvotes] = useState(0)
+	const preview = formatDate(comment.createdAt, 'comment')
 
 	function likeComment() {
 		setUpvotes(prev => prev + 1)
@@ -22,7 +25,7 @@ function Commentary({
     <div className={styles["comment__container"]}>
 			<Avatar
 				hasBorder={false}
-				src={comment.author.avatarUrl}
+				src={comment.author.avatarUrl ?? Logo}
 			/>
 			<div
 				className={styles["comment__content--wrapper"]}
@@ -30,7 +33,9 @@ function Commentary({
 				<div>
 					<strong>
 						{comment.author.name}
-						<p>Almost 2h ago..</p>
+						<time dateTime={comment.createdAt}>
+							{preview}
+						</time>
 					</strong>
 					<p>{comment.content}</p>
 					<button onClick={onDeleteRequested}>

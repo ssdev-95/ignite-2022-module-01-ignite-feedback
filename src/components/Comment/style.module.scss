@@ -5,6 +5,8 @@
 	display: flex;
 	gap: 0.7rem;
 	width: 100%;
+
+	animation: SLIDE 0.75s 1 $smooth;
 }
 
 .comment__content--wrapper {
@@ -20,9 +22,10 @@
 		strong {
 			margin-top: 0;
 			line-height: 1.4;
-			font-size:1.25rem;
+			font-size: 1rem;
 
-			p {
+			time {
+				display: block;
 				font-weight: 400;
 				color: $gray-400;
 				font-size: 0.8rem;
@@ -80,5 +83,17 @@
 		& > button:hover {
 			color: $green-400;
 		}
+	}
+}
+
+@keyframes SLIDE {
+	from {
+		transform: translateX(-100vw);
+		opacity:0;
+	}
+
+	to {
+		transform: translateX(0);
+		opacity: 1;
 	}
 }

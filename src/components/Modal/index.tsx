@@ -1,3 +1,4 @@
+import { WarningOctagon } from 'phosphor-react'
 import styles from './style.module.scss'
 
 interface ModalProps {
@@ -18,8 +19,11 @@ function Modal({
   return (
     <div className={styles["modal__overlay"]}>
 			<div className={styles["modal__container"]}>
+				<header>
+					<WarningOctagon size={56} weight="duotone" />
+				</header>
 				<strong>Delete comment</strong>
-				<p>Are you sure to dele this comment?</p>
+				<p>Are you sure to delete this comment?</p>
 				<footer>
 					<button onClick={onClose}>Cancel</button>
 					<button

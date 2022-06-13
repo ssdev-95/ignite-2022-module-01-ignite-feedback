@@ -15,6 +15,7 @@
 
 html {
 	font-size: 16px;
+	scroll-behavior: smooth;
 
 	@media(max-width: 869px) {
 		font-size: 75%6;
