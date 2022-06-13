@@ -7,7 +7,7 @@ interface SidebarProps {
 }
 
 const user = {
-	avatar_url: 'https://github.com/baliestri.png',
+	avatar_url: 'https://en.gravatar.com/userimage/221952240/1f48c295029265db95bdc00a82b43988.jpg',
 	firstName: 'Saromon',
 	role:  'Frontend dev.'
 }

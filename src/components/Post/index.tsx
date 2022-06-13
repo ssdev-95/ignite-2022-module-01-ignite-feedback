@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import Commentary from '../Comment'
+import Modal from '../Modal'
 import { api } from '../../services/api'
 
 import styles from './style.module.scss'
@@ -25,6 +26,8 @@ const endpoint = '/api/?results=1&inc=name,picture'
 function Post() {
 	const [comments, setComments] = useState<Comment[]>([lol])
 	const [newComment, setNewComment] = useState("")
+	const [isModalOpen, setIsModalOpen] = useState(true)
+	const [idToDelete, setIdToDelete] = useState("")
 
 	function uuid(text:string, timestamp:string) {
 		const id = [
@@ -73,6 +76,20 @@ function Post() {
 		setNewComment(value)
 	}
 
+	function handleDeleteFeeback(id:string) {
+		alert(id)
+	}
+
+	function handleOpenModal(id:string) {
+		setIsModalOpen(true)
+		setIdToDelete(id)
+	}
+
+	function handleCloseModal() {
+		setIsModalOpen(false)
+		setIdToDelete("")
+	}
+
   return (
     <div className={styles["post__container"]}>
 			<header>
@@ -117,9 +134,21 @@ function Post() {
 					</button>
 				</form>
 				{comments.map(comment => (
-					<Commentary key={comment.id} />
+					<Commentary
+						key={comment.id}
+						onDeleteRequested={
+							()=>handleOpenModal(comment.id)
+						}
+					/>
 				))}
 			</footer>
+			{isModalOpen && (
+				<Modal
+					idToDelete={idToDelete}
+					onDeleteRequested={handleDeleteFeedback}
+					onClose={handleCloseModal}
+				/>
+			)}
     </div>
   )
 }

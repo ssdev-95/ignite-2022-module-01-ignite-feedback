@@ -3,7 +3,11 @@ import { ThumbsUp, Trash } from 'phosphor-react'
 import Post from '../Post'
 import styles from './style.module.scss'
 
-function Commentary() {
+interface CommentProps {
+	onDeleteRequested: ()=>void;
+}
+
+function Commentary({onDeleteRequested}:CommentProps) {
 	const [likes, setLikes] = useState(0)
 
 	function likeComment() {
@@ -25,7 +29,7 @@ function Commentary() {
 						<p>Almost 2h ago..</p>
 					</strong>
 					<p>Salame é bom..</p>
-					<button>
+					<button omClick={onDeleteRequested}>
 						<Trash size={20} />
 					</button>
 				</div>
