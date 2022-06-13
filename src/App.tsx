@@ -24,8 +24,9 @@ function App() {
 		  </div>
 	  )
 	} catch(err) {
+		alert(err)
 		return (
-			err && (<InternalError error={err} />)
+			<InternalError />
 		)
 	}
 }

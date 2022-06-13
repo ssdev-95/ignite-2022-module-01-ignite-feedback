@@ -1,16 +1,12 @@
 import { WarningOctagon } from 'phosphor-react'
 import styles from './style.module.scss'
 
-interface ErrorProps {
-	error: any;
-}
-
-function InternalError({ error }: ErrorProps) {
+function InternalError() {
   return (
     <div className={styles["error__container"]}>
 			<WarningOctagon size={32} weight="duotone" />
-			<strong>{error}</strong>
-			<p>Deu ruim cachuera!</p>
+			<strong>Internal Server Error!</strong>
+			<p>We're undergoing to fix things out!</p>
     </div>
   )
 }
