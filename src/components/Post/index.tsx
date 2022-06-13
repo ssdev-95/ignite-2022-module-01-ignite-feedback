@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
+import Commentary from '../Comment'
 import { api } from '../../services/api'
 
 import styles from './style.module.scss'
@@ -14,10 +15,15 @@ type Comment = {
 	},
 	content: string
 }
-
+const lol = {
+  id: 1,
+	createdAt:'',
+	author: {name:'',avatarUrl:''},
+	content:'lol'
+}
 const endpoint = '/api/?results=1&inc=name,picture'
 function Post() {
-	const [comments, setComments] = useState<Comment[]>([])
+	const [comments, setComments] = useState<Comment[]>([lol])
 	const [newComment, setNewComment] = useState("")
 
 	function uuid(text:string, timestamp:string) {
@@ -111,9 +117,7 @@ function Post() {
 					</button>
 				</form>
 				{comments.map(comment => (
-					<p key={comment.id}>
-						{comment.content}
-					</p>
+					<Commentary key={comment.id} />
 				))}
 			</footer>
     </div>

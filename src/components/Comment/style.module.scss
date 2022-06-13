@@ -1,0 +1,93 @@
+@import "../../colors.scss";
+
+.comment__container {
+	margin-top: 1.5rem;
+	display: flex;
+	gap: 0.7rem;
+	width: 100%;
+}
+
+.comment__content--wrapper {
+	flex: 1;
+
+	div {
+		width: 100%;
+		background: $gray-600;
+		border-radius: 8px;
+		padding: 0.5rem;
+		position: relative;
+
+		strong {
+			margin-top: 0;
+			line-height: 1.4;
+			font-size:1.25rem;
+
+			p {
+				font-weight: 400;
+				color: $gray-400;
+				font-size: 0.8rem;
+			}
+		}
+
+
+		& > p {
+			color: $gray-300;
+			margin-top: 10%;
+			line-height: 1.4;
+		}
+
+		& > button {
+			position: absolute;
+			top: 0.7rem;
+			right: 0.7rem;
+			background: transparent;
+			color: $gray-400;
+			font-size: 0;
+			border: 0;
+			border-radius: 2px;
+
+			&:active {
+				color: $red-400;
+			}
+		}
+	}
+
+	& > button {
+		color: $gray-400;
+		margin-top: 0.7rem;
+		background: transparent;
+		border-radius: 2px;
+		border: 0;
+
+		display: flex;
+		align-items: center;
+		gap: 4px;
+
+		font-size: 0.8rem;
+		outline-offset: 2px;
+
+		& > span::before {
+			content: "\2022";
+			margin-right: 4px;
+		}
+
+		&:active {
+			color: $green-400;
+		}
+	}
+
+	@media(min-width:1024px) {
+		& > button:hover {
+			color: $green-400;
+		}
+	}
+}
+
+.avatar {
+	width: calc(3.5rem + 4px);
+	height: calc(3.5rem + 4px);
+	border-radius: 4px;
+
+	outline: 1px solid $green-500;
+	outline-offset: 2px;
+}
