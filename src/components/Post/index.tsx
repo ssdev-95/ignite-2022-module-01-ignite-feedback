@@ -26,7 +26,7 @@ const endpoint = '/api/?results=1&inc=name,picture'
 function Post() {
 	const [comments, setComments] = useState<Comment[]>([lol])
 	const [newComment, setNewComment] = useState("")
-	const [isModalOpen, setIsModalOpen] = useState(true)
+	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [idToDelete, setIdToDelete] = useState("")
 
 	function uuid(text:string, timestamp:string) {
@@ -77,7 +77,8 @@ function Post() {
 	}
 
 	function handleDeleteFeeback(id:string) {
-		alert(id)
+		const updated = comments.filter(item => item.id!==id)
+		setComments(updated)
 	}
 
 	function handleOpenModal(id:string) {
@@ -145,7 +146,7 @@ function Post() {
 			{isModalOpen && (
 				<Modal
 					idToDelete={idToDelete}
-					onDeleteRequested={handleDeleteFeedback}
+					onDeleteRequested={handleDeleteFeeback}
 					onClose={handleCloseModal}
 				/>
 			)}

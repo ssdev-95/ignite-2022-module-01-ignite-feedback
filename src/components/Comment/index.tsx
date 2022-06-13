@@ -29,7 +29,7 @@ function Commentary({onDeleteRequested}:CommentProps) {
 						<p>Almost 2h ago..</p>
 					</strong>
 					<p>Salame é bom..</p>
-					<button omClick={onDeleteRequested}>
+					<button onClick={onDeleteRequested}>
 						<Trash size={20} />
 					</button>
 				</div>

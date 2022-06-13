@@ -24,10 +24,10 @@ function Sidebar({ isOpen }:SidebarProps) {
 					className={styles.avatar}
 					src={user.avatar_url}
 				/>
-				<p>
+				<h6>
 					{user.firstName}
 					<p>{user.role}</p>
-				</p>
+				</h6>
 			</div>
 			<div>
 				<button>
