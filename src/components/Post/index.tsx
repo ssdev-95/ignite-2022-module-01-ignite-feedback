@@ -8,9 +8,16 @@ import { formatDate } from '../../services/date-format'
 import styles from './style.module.scss'
 
 type SubmitEvent = FormEvent<HTMLFormElement>;
-type InputEvent = ChangeEvent<HTMLTextareaElement>;
+type InputEvent = ChangeEvent<HTMLTextAreaElement>;
 
-interface IPost {
+type IPostContent = {
+	type: 'paragraph' | 'link';
+	text: string;
+	id: string;
+	href: string;
+}
+
+export interface IPost {
 	id: string;
 	author: {
 		name: string;
@@ -18,17 +25,12 @@ interface IPost {
 		role: string;
 	}
 	createdAt:string;
-	content: {
-		type: 'paragraph' | 'link';
-		text: string;
-		id: string;
-		href?: string;
-	}[];
+	content: IPostContent[];
 }
 
 export type IComment = {
 	id: string,
-	createdAt: string,
+	createdAt: Date,
 	author: {
 		avatarUrl: string,
 		name:string
@@ -36,14 +38,21 @@ export type IComment = {
 	content: string
 }
 
+type PostProps = {
+	post: IPost;
+}
+
 const endpoint = '/api/?results=1&inc=name,picture'
-function Post({ post }: IPost) {
+function Post({ post }: PostProps) {
 	const [comments, setComments] = useState<IComment[]>([])
 	const [newComment, setNewComment] = useState("")
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [idToDelete, setIdToDelete] = useState("")
 
-	const preview = formatDate(post.createdAt, 'post')
+	const preview = formatDate(
+		new Date(post.createdAt),
+		'post'
+	)
 
 	function uuid(text:string, timestamp:string) {
 		const id = [
@@ -65,9 +74,9 @@ function Post({ post }: IPost) {
 			const { data } = await api.get(endpoint)
 			const { name, picture } = data.results[0] as Record<string, any>
 
-			const stamp = String(new Date())
+			const stamp = new Date()
 			const comment = {
-				id: uuid(newComment, stamp),
+				id: uuid(newComment, stamp.toISOString()),
 				createdAt: stamp,
 				content: newComment,
 				author: {
@@ -121,7 +130,7 @@ function Post({ post }: IPost) {
 				</time>
 			</header>
 			<main className={styles["post__content"]}>
-				{post.content.map(item => {
+				{post.content.map((item: IPostContent)=> {
 					if(item.type === 'link') {
 						return (
 							<a
@@ -147,7 +156,6 @@ function Post({ post }: IPost) {
 						maxLength={100}
 						minLength={5}
 						autoComplete="off"
-						multiline="false"
 						value={newComment}
 						onChange={handleCreateNewFeedback}
 						required
@@ -159,7 +167,7 @@ function Post({ post }: IPost) {
 						Comment
 					</button>
 				</form>
-				{comments.map(comment => (
+				{comments.map((comment: IComment) => (
 					<Commentary
 						key={comment.id}
 						comment={comment}

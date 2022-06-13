@@ -3,11 +3,10 @@ import { formatDistance, subDays } from 'date-fns'
 type IDate = string | Date;
 type IType = 'comment' | 'post'
 
-export function formatDate(time:IDate, timeType:IType) {
+export function formatDate(time:Date, timeType:IType) {
 	try {
-		const date = typeof time === Date ? time : new Date(time)
 		const preview = formatDistance(
-			subDays(date, 3),
+			subDays(time, 3),
 			new Date(),
 			{ addSuffix: true }
 		)

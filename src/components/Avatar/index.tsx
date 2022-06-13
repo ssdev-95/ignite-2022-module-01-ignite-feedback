@@ -1,7 +1,7 @@
 import { useState, useEffect, HTMLAttributes } from 'react'
 import styles from './style.module.scss'
 
-interface AvatarProps extends HTMLAttributes<HTMLImageElemet> {
+interface AvatarProps extends HTMLAttributes<HTMLImageElement> {
 	hasBorder?: boolean;
 	noLoader?: boolean;
 }

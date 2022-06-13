@@ -15,7 +15,10 @@ function Commentary({
 	onDeleteRequested, comment
 }:CommentProps) {
 	const [upvotes, setUpvotes] = useState(0)
-	const preview = formatDate(comment.createdAt, 'comment')
+	const preview = formatDate(
+		new Date(comment.createdAt),
+		'comment'
+	)
 
 	function likeComment() {
 		setUpvotes(prev => prev + 1)
@@ -33,7 +36,7 @@ function Commentary({
 				<div>
 					<strong>
 						{comment.author.name}
-						<time dateTime={comment.createdAt}>
+						<time dateTime={comment.createdAt.toISOString()}>
 							{preview}
 						</time>
 					</strong>
