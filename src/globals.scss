@@ -13,6 +13,14 @@
 	font-family: Roboto, sans-serif;
 }
 
+html {
+	font-size: 16px;
+
+	@media(max-width: 869px) {
+		font-size: 75%6;
+	}
+}
+
 button {
 	transition: background 0.25s;
 }
@@ -35,6 +43,6 @@ button {
 	padding: 20px 3rem;
 
 	@media(max-width: 869px) {
-		padding: 32px 1.75rem;
+		padding: 32px 1.75rem; 
 	}
 }

@@ -11,7 +11,7 @@ function Posts() {
   return (
     <div className={styles["posts__container"]}>
 			{ posts.map(item => (
-				<Post />
+				<Post key={item} />
 			)) }
     </div>
   )
