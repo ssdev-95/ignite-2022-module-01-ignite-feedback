@@ -76,15 +76,6 @@
 	}
 }
 
-.avatar {
-	width: calc(3.5rem + 4px);
-	height: calc(3.5rem + 4px);
-	border-radius: 4px;
-
-	outline: 1px solid $green-500;
-	outline-offset: 2px;
-}
-
 .show {
 	visibility: visible;
 }

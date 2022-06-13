@@ -1,34 +1,38 @@
 import { useState } from 'react'
 import { ThumbsUp, Trash } from 'phosphor-react'
-import Post from '../Post'
+import Avatar from '../Avatar'
+import { IComment } from '../Post'
 import styles from './style.module.scss'
 
 interface CommentProps {
 	onDeleteRequested: ()=>void;
+	comment: IComment;
 }
 
-function Commentary({onDeleteRequested}:CommentProps) {
-	const [likes, setLikes] = useState(0)
+function Commentary({
+	onDeleteRequested, comment
+}:CommentProps) {
+	const [upvotes, setUpvotes] = useState(0)
 
 	function likeComment() {
-		setLikes(prev => prev + 1)
+		setUpvotes(prev => prev + 1)
 	}
 
   return (
     <div className={styles["comment__container"]}>
-			<img
-				className={styles.avatar}
-				src="https://github.com/filipedeschamps.png"
+			<Avatar
+				hasBorder={false}
+				src={comment.author.avatarUrl}
 			/>
 			<div
 				className={styles["comment__content--wrapper"]}
 			>
 				<div>
 					<strong>
-						Saromon
+						{comment.author.name}
 						<p>Almost 2h ago..</p>
 					</strong>
-					<p>Salame é bom..</p>
+					<p>{comment.content}</p>
 					<button onClick={onDeleteRequested}>
 						<Trash size={20} />
 					</button>
@@ -36,7 +40,7 @@ function Commentary({onDeleteRequested}:CommentProps) {
 				<button onClick={likeComment}>
 					<ThumbsUp size={16} />
 					Upvote
-					<span>{likes}</span>
+					<span>{upvotes}</span>
 				</button>
 			</div>
     </div>

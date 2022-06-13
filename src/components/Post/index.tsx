@@ -1,13 +1,32 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import Commentary from '../Comment'
 import Modal from '../Modal'
+import Avatar from '../Avatar'
 import { api } from '../../services/api'
+import { formatDate } from '../../services/date-format'
 
 import styles from './style.module.scss'
 
 type SubmitEvent = FormEvent<HTMLFormElement>;
 type InputEvent = ChangeEvent<HTMLTextareaElement>;
-type Comment = {
+
+interface IPost {
+	id: string;
+	author: {
+		name: string;
+		avatarUrl: string;
+		role: string;
+	}
+	createdAt:string;
+	content: {
+		type: 'paragraph' | 'link';
+		text: string;
+		id: string;
+		href?: string;
+	}[];
+}
+
+export type IComment = {
 	id: string,
 	createdAt: string,
 	author: {
@@ -17,17 +36,18 @@ type Comment = {
 	content: string
 }
 const lol = {
-  id: 1,
-	createdAt:'',
-	author: {name:'',avatarUrl:''},
-	content:'lol'
+  id: 'j2s8fujekak2k2e9dj3j3is9',
+	createdAt:'2021-05-18 20:30',
+	author: {name:'Filipe Deschamps',avatarUrl:"https://github.com/filipedeschamps.png"},
+	content:'Salame é bom'
 }
 const endpoint = '/api/?results=1&inc=name,picture'
-function Post() {
-	const [comments, setComments] = useState<Comment[]>([lol])
+function Post({ post }: IPost) {
+	const [comments, setComments] = useState<IComment[]>([lol])
 	const [newComment, setNewComment] = useState("")
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [idToDelete, setIdToDelete] = useState("")
+	const preview = formatDate(post.createdAt)
 
 	function uuid(text:string, timestamp:string) {
 		const id = [
@@ -38,7 +58,7 @@ function Post() {
 		return id;
 	}
 
-	function handleSendFeedback(e:SubmitEvent) {
+	async function handleSendFeedback(e:SubmitEvent) {
 		e.preventDefault()
 
 		if(!newComment.length) {
@@ -46,8 +66,7 @@ function Post() {
 		}
 
 		try {
-			alert(newComment)
-			/*const { data } = await api.get(endpoint)
+			const { data } = await api.get(endpoint)
 			const { name, picture } = data.results[0] as Record<string, any>
 
 			const stamp = String(Date.now())
@@ -56,14 +75,14 @@ function Post() {
 				createdAt: stamp,
 				content: newComment,
 				author: {
-					name: `${name.first} ${name.last}`,
+					name: [name.first, name.last].join(' '),
 					avatarUrl: picture.large
 				}
 			}
 
-			setComments(prev => [...prev, comment])*/
+			setComments(prev => [...prev, comment])
 		} catch(err:any) {
-			alert(err)
+			if (err) console.error(err)
 		} finally {
 			setNewComment("")
 			return
@@ -94,26 +113,31 @@ function Post() {
   return (
     <div className={styles["post__container"]}>
 			<header>
-				<img
-					className={styles.avatar}
-					src="https://github.com/maykbrito.png"
-				/>
+				<Avatar src="https://github.com/maykbrito.png" />
 				<p>
-					Mayk Brito
-					<p>Educator @Rocketseat&copy;</p>
+					{post.author.name}
+					<p>{post.author.role}</p>
 				</p>
 				<time
-					datetime="2022-06-10 21:00"
+					datetime={post.createdAt}
 				>
-					Almost 4h ago..
+					{preview}
 				</time>
 			</header>
 			<main className={styles["post__content"]}>
-				<p>Fala devs, tudo beleza!?</p>
-				<p>Aqui é o Mayk Brito passando pra dizer que a Maratona Explorer foi insana.&nbsp;&nbsp;🥳</p>
-				<p>As versões da comunidade ficaram sensacionais!</p>
-				<p>A gente se vê na próxima!&nbsp;&nbsp;🚀</p>
-				<p>Abraço do Maykao!&nbsp;&nbsp;💜</p>
+				{post.content.map(item => {
+					if(item.type === 'link') {
+						return (
+							<a key={item.id} href={item.href}>
+								{item.text}
+							</a>
+						)
+					} else {				
+						return (
+							<p key={item.id}>{item.text}</p>
+						)
+					}
+				})}
 			</main>
 			<footer className={styles["post__footer"]}>
 				<strong>Leave you feedback</strong>
@@ -124,7 +148,8 @@ function Post() {
 						minLength={5}
 						autocomplete="off"
 						multiline={false}
-						defaultValue={newComment}
+						value={newComment}
+						onChange={handleCreateNewFeedback}
 						required
 					/>
 					<button
@@ -137,6 +162,7 @@ function Post() {
 				{comments.map(comment => (
 					<Commentary
 						key={comment.id}
+						comment={comment}
 						onDeleteRequested={
 							()=>handleOpenModal(comment.id)
 						}

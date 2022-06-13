@@ -1,4 +1,5 @@
 import * as Icon from 'phosphor-react'
+import Avatar from '../Avatar'
 import Poster from '../../assets/poster.png'
 import styles from './style.module.scss'
 
@@ -20,10 +21,7 @@ function Sidebar({ isOpen }:SidebarProps) {
 		].join(' ')}>
 			<img src={Poster} className={styles.poster}/>
 			<div>
-				<img
-					className={styles.avatar}
-					src={user.avatar_url}
-				/>
+				<Avatar src={user.avatar_url} />
 				<h6>
 					{user.firstName}
 					<p>{user.role}</p>
